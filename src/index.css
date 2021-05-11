@@ -1,13 +1,79 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.box {
+  position: relative;
+  width: 360px;
+  height: 720px;
+  margin: auto;
+  overflow: hidden;
+}
+.firstImg {
+  width: 100%;
+  height: 100%;
+  background: url(image.png);
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
+/* .filter img {
+  display: none;
+} */
+.filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.filter img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.filter .brushR2L-enter {
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+.filter .brushR2L-enter-active {
+  transition: clip-path 0.1s;
+  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+}
+.filter .brushL2R-enter {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+.filter .brushL2R-enter-active {
+  transition: clip-path 0.1s;
+  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+}
+.filter .firstImg--enter {
+  filter: blur(10px);
+}
+.filter .firstImg--enter-active {
+  transition: filter 0.2s;
+  filter: blur(0);
+}
+
+.fullImg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: url(fullImg.png);
 }

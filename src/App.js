@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [btnState, setBtnState] = useState(false);
+  const [noticeMes, setNoticeMes] = useState("");
   const deferredPrompt = useRef();
 
   console.log(btnState);
@@ -15,6 +16,13 @@ function App() {
       e.preventDefault();
       deferredPrompt.current = e;
       setBtnState(true); // hiện nút install khi browser nhận thấy device đủ điều kiện và chưa có install app hoặc khi người dùng bấm cancel install
+    });
+    window.addEventListener("appinstalled", () => {
+      // Hide the app-provided install promotion
+      setBtnState(false);
+      // Clear the deferredPrompt so it can be garbage collected
+      deferredPrompt.current = null;
+      setNoticeMes("PWA was installed");
     });
   }, []);
 
@@ -39,11 +47,13 @@ function App() {
           <Link to="/about">About</Link>
           <Link to="/users">Users</Link>
         </header>
+        {noticeMes && <div>{noticeMes}</div>}
         <div>
           <button onClick={handleClickInstall} hidden={!btnState}>
             Install this app to your device
           </button>
         </div>
+
         <Switch>
           <Route path="/about" component={About}></Route>
           <Route path="/users" component={Users}></Route>
