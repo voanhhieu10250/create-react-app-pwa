@@ -49,6 +49,15 @@ self.addEventListener("fetch", (e) => {
   // if request is made for web page url must contains http.
   if (!(e.request.url.indexOf("http") === 0)) return; // skip the request. if request is not made with http protocol
   if (!navigator.onLine) {
+    if (
+      e.request.url === "http://localhost:3000/static/js/vendors~main.chunk.js"
+    ) {
+      e.waitUntil(
+        this.registration.showNotification("Internet", {
+          body: "You're in offline mode",
+        })
+      );
+    }
     e.respondWith(
       caches.match(e.request).then((resp) => {
         if (resp) {
