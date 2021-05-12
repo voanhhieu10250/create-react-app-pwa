@@ -18,6 +18,7 @@ function CPChangeImg({
 
   useEffect(() => {
     if (countLoadedImg === images.length && !mainReady) setMainReady(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countLoadedImg]);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ function CPChangeImg({
         else setShowImg(showImg + 1);
       }, timeout / countLoadedImg);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countLoadedImg, showImg]);
 
   const renderImgTags = () =>

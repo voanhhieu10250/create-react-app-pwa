@@ -14,7 +14,9 @@ function Home() {
       </div>
       <div>
         <button onClick={() => setToggleImg2(!toggleImg2)}>Toggle Img 2</button>
-        <button onClick={() => setStartAnimation(true)}>Start Animation</button>
+        <button onClick={() => setStartAnimation(!startAnimation)}>
+          Toggle Animation
+        </button>
       </div>
     </div>
   );
