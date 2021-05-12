@@ -33,6 +33,8 @@ code {
   position: absolute;
   width: 100%;
   height: 100%;
+  max-width: calc(100vh / 2);
+  max-height: 100vh;
   top: 0;
   left: 0;
   z-index: 1;
@@ -43,22 +45,22 @@ code {
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
-.filter .brushR2L-enter {
-  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
 
-  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+.filter .brushR2L-exit {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
-.filter .brushR2L-enter-active {
-  transition: clip-path 0.1s;
-  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+.filter .brushR2L-exit-active {
+  transition: clip-path 0.2s;
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
 }
-.filter .brushL2R-enter {
-  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+.filter .brushL2R-exit {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
-.filter .brushL2R-enter-active {
-  transition: clip-path 0.1s;
-  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+.filter .brushL2R-exit-active {
+  transition: clip-path 0.2s;
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
 }
 .filter .firstImg--enter {
   filter: blur(10px);

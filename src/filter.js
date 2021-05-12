@@ -1,90 +1,159 @@
 import { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import CPChangeImg from "./CPChangeImg";
 
-function CPfilter() {
+function CPfilter({ start }) {
   const [loadedImg, setLoadedImg] = useState(0);
-  const [isReady, setIsReady] = useState(false);
-  const [showImg, setShowImg] = useState(-1);
+  const [doneAnimate, setDoneAnimate] = useState(false);
+  const [showImg, setShowImg] = useState(0);
+  const [mainReady, setMain] = useState(false);
 
   useEffect(() => {
-    if (isReady && showImg < 7) {
+    if (start && mainReady && loadedImg === 8 && showImg < 8) {
       setTimeout(() => setShowImg(showImg + 1), 200);
     }
-    if (loadedImg === 7 && !isReady) {
-      setIsReady(true);
-    }
-  }, [loadedImg, isReady, showImg]);
+    // if (start && mainReady && isReady && showImg < 7) {
+    //   setTimeout(() => setShowImg(showImg + 1), 200);
+    // }
+    // if (start && mainReady && loadedImg === 7 && !isReady) {
+    //   setIsReady(true);
+    // }
+  }, [loadedImg, showImg, start, mainReady]);
 
   const handleLoaded = () => {
     setLoadedImg(loadedImg + 1);
   };
 
+  if (!start) return <div className="filter" />;
+  console.log("main: ", mainReady);
   return (
     <div className="filter">
-      <CSSTransition timeout={200} classNames="firstImg-" in={showImg >= 0}>
+      {/* Main image behind the effect */}
+      {/* <img
+        onLoad={() => setMain(true)}
+        src="/img/brushEffect/main/main.gif"
+        alt="img"
+        hidden={!(mainReady && loadedImg === 8)}
+      /> */}
+
+      <CPChangeImg
+        setMainReady={setMain}
+        mainReady={mainReady}
+        endAnimation={doneAnimate}
+      />
+      {/* End */}
+
+      <CSSTransition
+        timeout={200}
+        classNames="firstImg-"
+        in={mainReady && showImg <= 0}
+        unmountOnExit={true}
+      >
         <img
           onLoad={handleLoaded}
           src="/image.png"
           alt="img"
-          hidden={!(showImg >= 0)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
-      <CSSTransition timeout={100} classNames="brushR2L" in={showImg >= 1}>
+
+      <CSSTransition
+        timeout={200}
+        classNames="brushR2L"
+        in={mainReady && showImg <= 1}
+        unmountOnExit={true}
+      >
         <img
           onLoad={handleLoaded}
-          src="/Mask1.png"
+          src="/img/brushEffect/brush1.png"
           alt="img"
-          hidden={!(showImg >= 1)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
-      <CSSTransition timeout={100} classNames="brushL2R" in={showImg >= 2}>
+      <CSSTransition
+        timeout={200}
+        classNames="brushL2R"
+        in={mainReady && showImg <= 2}
+        unmountOnExit={true}
+      >
         <img
           onLoad={handleLoaded}
-          src="/Mask2.png"
+          src="/img/brushEffect/brush2.png"
           alt="img"
-          hidden={!(showImg >= 2)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
-      <CSSTransition timeout={100} classNames="brushR2L" in={showImg >= 3}>
+      <CSSTransition
+        timeout={200}
+        classNames="brushR2L"
+        in={mainReady && showImg <= 3}
+        unmountOnExit={true}
+      >
         <img
           onLoad={handleLoaded}
-          src="/Mask3.png"
+          src="/img/brushEffect/brush3.png"
           alt="img"
-          hidden={!(showImg >= 3)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
-      <CSSTransition timeout={100} classNames="brushL2R" in={showImg >= 4}>
+      <CSSTransition
+        timeout={200}
+        classNames="brushL2R"
+        in={mainReady && showImg <= 4}
+        unmountOnExit={true}
+      >
         <img
           onLoad={handleLoaded}
-          src="/Mask4.png"
+          src="/img/brushEffect/brush4.png"
           alt="img"
-          hidden={!(showImg >= 4)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
-      <CSSTransition timeout={100} classNames="brushR2L" in={showImg >= 5}>
+      <CSSTransition
+        timeout={200}
+        classNames="brushR2L"
+        in={mainReady && showImg <= 5}
+        unmountOnExit={true}
+      >
         <img
           onLoad={handleLoaded}
-          src="/Mask5.png"
+          src="/img/brushEffect/brush5.png"
           alt="img"
-          hidden={!(showImg >= 5)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
-      <CSSTransition timeout={100} classNames="brushL2R" in={showImg >= 6}>
+      <CSSTransition
+        timeout={200}
+        classNames="brushL2R"
+        in={mainReady && showImg <= 6}
+        unmountOnExit={true}
+      >
         <img
           onLoad={handleLoaded}
-          src="/Mask6.png"
+          src="/img/brushEffect/brush6.png"
           alt="img"
-          hidden={!(showImg >= 6)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
-      <CSSTransition timeout={100} classNames="brushR2L" in={showImg >= 7}>
+      <CSSTransition
+        timeout={200}
+        classNames="brushR2L"
+        in={mainReady && showImg <= 7}
+        unmountOnExit={true}
+        onExit={() => {
+          setDoneAnimate(true);
+        }}
+      >
         <img
           onLoad={handleLoaded}
-          src="/Mask7.png"
+          src="/img/brushEffect/brush7.png"
           alt="img"
-          hidden={!(showImg >= 7)}
+          hidden={!(mainReady && loadedImg === 8)}
         />
       </CSSTransition>
+
+      {/* Final image */}
+      <img src="/fullImg.png" alt="img" hidden={!doneAnimate} />
     </div>
   );
 }

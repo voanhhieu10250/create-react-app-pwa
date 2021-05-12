@@ -11,7 +11,7 @@ const limitCacheSize = (name, size) => {
 };
 
 self.addEventListener("install", (e) => {
-  console.log("Service worker: installed");
+  // console.log("Service worker: installed");
   e.waitUntil(
     caches.open(cacheData).then((cache) => {
       cache.addAll([
@@ -28,7 +28,7 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("activate", (e) => {
-  console.log("Service worker: activated");
+  // console.log("Service worker: activated");
   e.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -44,7 +44,7 @@ self.addEventListener("activate", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  console.log("Service worker: Fetching");
+  // console.log("Service worker: Fetching");
   // check if request is made by chrome extensions or web page
   // if request is made for web page url must contains http.
   if (!(e.request.url.indexOf("http") === 0)) return; // skip the request. if request is not made with http protocol

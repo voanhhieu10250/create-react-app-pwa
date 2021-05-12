@@ -10,7 +10,7 @@ function App() {
   const [noticeMes, setNoticeMes] = useState("");
   const deferredPrompt = useRef();
 
-  console.log(btnState);
+  // console.log(btnState);
   useEffect(() => {
     window.addEventListener("beforeinstallprompt", (e) => {
       e.preventDefault();
